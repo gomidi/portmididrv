@@ -10,3 +10,6 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+_example/.gometalinter-7nr5cj/main.go
+_example/example
