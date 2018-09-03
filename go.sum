@@ -1,4 +1,6 @@
 github.com/gomidi/connect v0.9.0 h1:UpX2PBl3660JEpKk2Q3uwuLsbc2AVoySBVkwTGbHyAA=
 github.com/gomidi/connect v0.9.0/go.mod h1:zu6PoN7Xs/37thtXZ+4Wl1MMg8MxenS7U/M3rn6trNo=
+github.com/gomidi/connect v0.10.0 h1:8oym4O321D4hbN/DW4NwEDpF5P0IuMK3JZThc/Y1SDA=
+github.com/gomidi/connect v0.10.0/go.mod h1:zu6PoN7Xs/37thtXZ+4Wl1MMg8MxenS7U/M3rn6trNo=
 github.com/rakyll/portmidi v0.0.0-20170620004031-e434d7284291 h1:hl7rQwLldjB+FCyUuxSFCAx986GONIoRQwsMesdOknE=
 github.com/rakyll/portmidi v0.0.0-20170620004031-e434d7284291/go.mod h1:tO1ylmFo6+hnYFvj/fd92q30wkNQwgWC/8mcHq0KkQU=
