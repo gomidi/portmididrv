@@ -70,6 +70,9 @@ func (i *in) Close() error {
 
 // Open opens the MIDI in port
 func (i *in) Open() (err error) {
+	if i.stream != nil {
+		return nil
+	}
 	i.stream, err = portmidi.NewInputStream(i.id, i.driver.buffersizeIn)
 	if err != nil {
 		i.stream = nil
