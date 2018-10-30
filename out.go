@@ -3,11 +3,11 @@ package portmididrv
 import (
 	"fmt"
 
-	"github.com/gomidi/connect"
 	"github.com/rakyll/portmidi"
+	"gitlab.com/gomidi/midi/mid"
 )
 
-func newOut(driver *driver, id portmidi.DeviceID, name string) connect.Out {
+func newOut(driver *driver, id portmidi.DeviceID, name string) mid.Out {
 	return &out{driver: driver, id: id, name: name}
 }
 
@@ -24,10 +24,10 @@ func (o *out) IsOpen() bool {
 }
 
 // Send sends a message to the out port
-// If the out port is closed, it returns connect.ErrClosed
+// If the out port is closed, it returns mid.ErrClosed
 func (o *out) Send(b []byte) error {
 	if o.stream == nil {
-		return connect.ErrClosed
+		return mid.ErrClosed
 	}
 
 	err := o.stream.WriteShort(int64(b[0]), int64(b[1]), int64(b[2]))

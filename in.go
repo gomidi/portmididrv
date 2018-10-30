@@ -5,11 +5,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gomidi/connect"
 	"github.com/rakyll/portmidi"
+	"gitlab.com/gomidi/midi/mid"
 )
 
-func newIn(driver *driver, id portmidi.DeviceID, name string) connect.In {
+func newIn(driver *driver, id portmidi.DeviceID, name string) mid.In {
 	return &in{driver: driver, id: id, name: name}
 }
 
