@@ -30,7 +30,17 @@ func (o *out) Send(b []byte) error {
 		return mid.ErrClosed
 	}
 
-	err := o.stream.WriteShort(int64(b[0]), int64(b[1]), int64(b[2]))
+	if len(b) < 2 {
+		return fmt.Errorf("cannot send less than two message bytes")
+	}
+
+	var last int64
+	// ProgramChange messages only have 2 bytes
+	if len(b) > 2 {
+		last = int64(b[2]) 
+	}
+
+	err := o.stream.WriteShort(int64(b[0]), int64(b[1]), last)
 	if err != nil {
 		return fmt.Errorf("could not send message to MIDI out %v (%s): %v", o.Number(), o, err)
 	}
