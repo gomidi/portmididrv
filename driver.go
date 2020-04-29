@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/rakyll/portmidi"
-	"gitlab.com/gomidi/midi/mid"
+	"gitlab.com/gomidi/midi"
 )
 
 type driver struct {
@@ -13,7 +13,7 @@ type driver struct {
 	buffersizeIn   int64
 	buffersizeOut  int64
 	sleepingTime   time.Duration
-	opened         []mid.Port
+	opened         []midi.Port
 }
 
 func (d *driver) String() string {
@@ -32,7 +32,7 @@ func (d *driver) Close() (err error) {
 }
 
 // New returns a new driver
-func New(options ...Option) (mid.Driver, error) {
+func New(options ...Option) (midi.Driver, error) {
 	err := portmidi.Initialize()
 	if err != nil {
 		return nil, fmt.Errorf("can't initialize portmidi: %v", err)
@@ -55,7 +55,7 @@ func New(options ...Option) (mid.Driver, error) {
 }
 
 // Ins returns the available MIDI in ports
-func (d *driver) Ins() (ins []mid.In, err error) {
+func (d *driver) Ins() (ins []midi.In, err error) {
 	for i := 0; i < portmidi.CountDevices(); i++ {
 		info := portmidi.Info(portmidi.DeviceID(i))
 		if info != nil && info.IsInputAvailable {
@@ -66,7 +66,7 @@ func (d *driver) Ins() (ins []mid.In, err error) {
 }
 
 // Outs returns the available MIDI out ports
-func (d *driver) Outs() (outs []mid.Out, err error) {
+func (d *driver) Outs() (outs []midi.Out, err error) {
 	for i := 0; i < portmidi.CountDevices(); i++ {
 		info := portmidi.Info(portmidi.DeviceID(i))
 		if info != nil && info.IsOutputAvailable {

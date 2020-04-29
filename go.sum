@@ -6,3 +6,5 @@ gitlab.com/gomidi/midi v1.9.0 h1:nLwy9vnnlFiaaLBznLnxLMaqz/yrCbf7ajfn60koIaQ=
 gitlab.com/gomidi/midi v1.9.0/go.mod h1:Geyousi3Lg15GJRg0CnpxQMQIgDLapqJKq2Cbf7LJfs=
 gitlab.com/gomidi/midi v1.10.0 h1:zh1vPE1oAPCs1vkFwGGS8iftsQzlChjMxhIQOj9ReSE=
 gitlab.com/gomidi/midi v1.10.0/go.mod h1:Geyousi3Lg15GJRg0CnpxQMQIgDLapqJKq2Cbf7LJfs=
+gitlab.com/gomidi/midi v1.15.0 h1:eGSQqAGLB+OUr8tFtKOLWJE3jRAoIZorRVeKEATemRo=
+gitlab.com/gomidi/midi v1.15.0/go.mod h1:3ohtNOhqoSakkuLG/Li1OI6I3J1c2LErnJF5o/VBq1c=
