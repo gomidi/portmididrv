@@ -1,10 +1,10 @@
 # portmididrv
 
-[![Build Status Travis/Linux](https://travis-ci.org/gomidi/portmididrv.svg?branch=master)](http://travis-ci.org/gomidi/portmididrv)
+If you are viewing this on Github, please note that the development has been moved to Gitlab: gitlab.com/gomidi/portmididrv
 
 ## Purpose
 
-A driver for the unified MIDI driver interface at https://github.com/gomidi/connect .
+A driver for the unified MIDI driver interface https://gitlab.com/gomidi/midi.Driver .
 
 This driver is based on the portmidi project (see https://github.com/rakyll/portmidi for more information).
 
@@ -23,7 +23,7 @@ go get -d github.com/gomidi/portmididrv
 
 ## Documentation
 
-[![portmididrv docs](http://godoc.org/github.com/gomidi/portmididrv?status.png)](http://godoc.org/github.com/gomidi/portmididrv)
+[Documentation](https://pkg.go.dev/gitlab.com/gomidi/portmididrv)
 
 ## Example
 
@@ -35,9 +35,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/gomidi/connect"
-	"github.com/gomidi/mid"
-	driver "github.com/gomidi/portmididrv"
+	"gitlab.com/gomidi/midi"
+	"gitlab.com/gomidi/midi/mid"
+	driver "gitlab.com/gomidi/portmididrv"
 )
 
 func must(err error) {
@@ -73,10 +73,10 @@ func main() {
 	must(in.Open())
 	must(out.Open())
 
-	wr := mid.WriteTo(out)
+	wr := mid.ConnectOut(out)
 
 	// listen for MIDI
-	go mid.NewReader().ReadFrom(in)
+	go mid.ConnectIn(in, mid.NewReader())
 
 	{ // write MIDI to out that passes it to in on which we listen.
 		err := wr.NoteOn(60, 100)
@@ -96,11 +96,11 @@ func main() {
 	}
 }
 
-func printPort(port connect.Port) {
+func printPort(port midi.Port) {
 	fmt.Printf("[%v] %s\n", port.Number(), port.String())
 }
 
-func printInPorts(ports []connect.In) {
+func printInPorts(ports []midi.In) {
 	fmt.Printf("MIDI IN Ports\n")
 	for _, port := range ports {
 		printPort(port)
@@ -108,7 +108,7 @@ func printInPorts(ports []connect.In) {
 	fmt.Printf("\n\n")
 }
 
-func printOutPorts(ports []connect.Out) {
+func printOutPorts(ports []midi.Out) {
 	fmt.Printf("MIDI OUT Ports\n")
 	for _, port := range ports {
 		printPort(port)
