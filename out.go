@@ -23,28 +23,28 @@ func (o *out) IsOpen() bool {
 	return o.stream != nil
 }
 
-// Send sends a message to the out port
-// If the out port is closed, it returns mid.ErrClosed
-func (o *out) Send(b []byte) error {
+// Write writes a MIDI message to the outut port
+// If the output port is closed, it returns midi.ErrPortClosed
+func (o *out) Write(b []byte) (int, error) {
 	if o.stream == nil {
-		return midi.ErrPortClosed
+		return 0, midi.ErrPortClosed
 	}
 
 	if len(b) < 2 {
-		return fmt.Errorf("cannot send less than two message bytes")
+		return 0, fmt.Errorf("cannot send less than two message bytes")
 	}
 
 	var last int64
 	// ProgramChange messages only have 2 bytes
 	if len(b) > 2 {
-		last = int64(b[2]) 
+		last = int64(b[2])
 	}
 
 	err := o.stream.WriteShort(int64(b[0]), int64(b[1]), last)
 	if err != nil {
-		return fmt.Errorf("could not send message to MIDI out %v (%s): %v", o.Number(), o, err)
+		return 0, fmt.Errorf("could not send message to MIDI out %v (%s): %v", o.Number(), o, err)
 	}
-	return nil
+	return len(b), nil
 }
 
 // Underlying returns the underlying *portmidi.Stream. It will be nil, if the port is closed.
